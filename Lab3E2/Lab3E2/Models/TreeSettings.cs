@@ -5,9 +5,7 @@ using System.Threading.Tasks;
 
 namespace Lab3E2.Models
 {
-    public class Bebidas
+    public class TreeSettings
     {
-        public string nombre { get; set; }
-        public string sabor { get; set; }
     }
 }
