@@ -7,5 +7,8 @@ namespace Lab3E2.Models
 {
     public class Arbol
     {
+        
+        
+
     }
 }

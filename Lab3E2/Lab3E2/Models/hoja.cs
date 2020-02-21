@@ -6,23 +6,22 @@ using Lab3E2.Models;
 
 namespace Lab3E2.Models
 {
-    public class hoja<T> where T : IComparable
+    internal class hoja<T> where T : IComparable
     {
         #region varibles globales
-        //padre
-        int Father { get; set; }
+        //id identificador del nodo a utilizar
+        internal int id { get; set; }
+        //padre valor id del nodo padre
+        internal int Father { get; set; }
         //valores de la clase bebidas
-        List<Bebidas> valores;
-        //hijos
-        List<int> hijos { get; set; }
-        List<int> llaves { get; set; }
-        //id
-        int id { get; set; }
+        internal List<Bebidas> valores;
+        //hijos valores id de los que conecta
+        internal List<int> hijos { get; set; }
         //rango de nodo
-        int rango { get; set; }
+        public int rango { get; set; }
         internal hoja(int range, int posicion, int padre)
         {
-            if (true)
+            if (rango < 0)
             {
                 throw new ArgumentOutOfRangeException("rango");
             }
@@ -33,7 +32,6 @@ namespace Lab3E2.Models
             id = posicion;
             rango = range;
             Father = padre;
-
         }
         #endregion
 
@@ -90,16 +88,16 @@ namespace Lab3E2.Models
         //                }
         //            }
         //        }
-                
+
         //    }
         //}
-        
-        internal int NoDatos 
+
+        internal int NoDatos
         {
-            get 
+            get
             {
                 int i = 0;
-                while (i<rango && hasSpace)
+                while (i < rango && hasSpace)
                 {
                     i++;
                 }
@@ -108,40 +106,40 @@ namespace Lab3E2.Models
         }
         internal bool hasSpace
         {
-            get  
+            get
             {
                 bool hasSpace = false;
-                if (valores.Count < rango - 1)
+                if ( hijos.Count < rango)
                 {
-                    hasSpace = true;       
+                    hasSpace = true;
                 }
                 return hasSpace;
             }
         }
         internal bool IsLeaf
         {
-            get 
+            get
             {
                 bool IsLeaf = true;
-                for (int i = 0; i < hijos.Count; i++)
-                {
-                    if (hijos[i] != 0)
-                    {
-                        IsLeaf = false;
-                        break;
-                    }
-                }
+
                 return IsLeaf;
             }
         }
-        internal bool Underflow 
+        internal bool Underflow
         {
-            get 
+            get
             {
                 return (valores.Count < ((rango / 2) - 1));
             }
         }
-        public int comparador(Bebidas bebida1, Bebidas dato) 
+        internal bool Overflow 
+        {
+            get
+            {
+                return (valores.Count > rango - 1);
+            }
+        }
+        public int comparador(Bebidas bebida1, Bebidas dato)
         {
             return bebida1 == null || dato == null ? 1 :
                 bebida1.nombre.CompareTo(dato.nombre);
